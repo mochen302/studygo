@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"regexp"
+	"io/ioutil"
+	"strconv"
 )
 
 func main() {
@@ -30,4 +33,19 @@ func main() {
 	//fmt.Printf(make([]int, 50, 100))
 	//new([100]int)[0:50]
 
+	fmt.Println(FindFileDigits("resources/text.txt"))
+
+}
+
+var digitRegexp = regexp.MustCompile("[0-9]+")
+
+func FindFileDigits(filename string) []int {
+	fileBytes, _ := ioutil.ReadFile(filename)
+	b := digitRegexp.FindAll(fileBytes, len(fileBytes))
+	c := make([]int, 0)
+	for _, bytes := range b {
+		num, _ := strconv.Atoi(string(bytes))
+		c = append(c, num)
+	}
+	return c
 }
