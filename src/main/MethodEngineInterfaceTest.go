@@ -5,11 +5,11 @@ type Engine interface {
 	Stop()
 }
 
-type Car struct {
+type car struct {
 	Engine
 }
 
-func (c *Car) GoToWorkIn() {
+func (c *car) GoToWorkIn() {
 	c.Start()
 	c.Stop()
 }
