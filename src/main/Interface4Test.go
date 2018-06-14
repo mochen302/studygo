@@ -8,10 +8,11 @@ type myPrintInterface interface {
 type myInterface struct {
 }
 
-func (my *myInterface) print() {
+func (my myInterface) print() {
 	fmt.Println("this is my interface!")
 }
 func main() {
-	x := myInterface{}
-	//x.(myPrintInterface).print()
+	var x interface{}
+	x = myInterface{}
+	x.(myPrintInterface).print()
 }
