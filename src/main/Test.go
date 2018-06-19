@@ -15,9 +15,9 @@ func main() {
 	fmt.Println(strings.Replace("this is a test \n es", "t", "a", -1))
 }
 
-func n() { print(a1) }
+func n() { consume(a1) }
 
 func m() {
 	a1 := "O"
-	print(a1)
+	consume(a1)
 }
