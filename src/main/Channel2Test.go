@@ -7,11 +7,11 @@ import (
 
 func main() {
 	//sendChan := make(chan int)//会死锁
-	sendChan := make(chan int, 10000)
+	sendChan := make(chan int)
 	receiveChan := make(chan string)
-	build(sendChan)
-	go processChannel(sendChan, receiveChan)
+	go processChannel(sendChan, receiveChan) //开启一个协程
 	go consume(receiveChan)
+	build(sendChan)
 	time.Sleep(5 * 1e9)
 }
 func build(dataChan chan<- int) {
@@ -19,13 +19,10 @@ func build(dataChan chan<- int) {
 		dataChan <- i
 	}
 }
-
 func processChannel(in <-chan int, out chan<- string) {
-	result := 0
 	for inValue := range in {
-		result += inValue
+		out <- string(inValue)
 	}
-	out <- string(result)
 }
 
 func consume(ch <-chan string) {
